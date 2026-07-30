@@ -85,6 +85,21 @@ const structuredData = {
       </div>
     </section>
 
+    <section class="rss-utility" aria-label="RSS feed">
+      <span class="rss-icon" aria-hidden="true"><Rss size={21} strokeWidth={1.8} /></span>
+      <span class="rss-copy">
+        <span class="rss-title">RSS feed</span>
+        <span class="rss-description">Use it in any podcast app that supports RSS.</span>
+      </span>
+      <span class="rss-actions">
+        <a href={rssUrl} target="_blank" rel="noopener" class="rss-open">Open feed</a>
+        <button type="button" class="rss-button" data-copy-rss data-rss-url={rssUrl}>
+          <Copy size={16} aria-hidden="true" />
+          <span data-copy-rss-label>Copy RSS feed</span>
+        </button>
+      </span>
+    </section>
+
     <section class="live-recording" aria-labelledby="live-recording-title">
       <div>
         <p class="section-label">Live recording</p>
@@ -108,21 +123,6 @@ const structuredData = {
         Hear from OpenClaw maintainers, contributors, and guests about what they are learning, what they are making,
         and what comes next for personal AI.
       </p>
-    </section>
-
-    <section class="rss-utility" aria-label="RSS feed">
-      <span class="rss-icon" aria-hidden="true"><Rss size={21} strokeWidth={1.8} /></span>
-      <span class="rss-copy">
-        <span class="rss-title">RSS feed</span>
-        <span class="rss-description">Use it in any podcast app that supports RSS.</span>
-      </span>
-      <span class="rss-actions">
-        <a href={rssUrl} target="_blank" rel="noopener" class="rss-open">Open feed</a>
-        <button type="button" class="rss-button" data-copy-rss data-rss-url={rssUrl}>
-          <Copy size={16} aria-hidden="true" />
-          <span data-copy-rss-label>Copy RSS feed</span>
-        </button>
-      </span>
     </section>
 
     <SiteFooter current="podcast" credit="simple" />
