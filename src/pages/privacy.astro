@@ -2,12 +2,12 @@
 import Layout from '../layouts/Layout.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 
-const effectiveDate = 'March 7, 2026';
+const effectiveDate = 'August 2, 2026';
 ---
 
 <Layout
   title="Privacy Policy - OpenClaw"
-  description="Privacy Policy for OpenClaw mobile apps."
+  description="Privacy Policy for OpenClaw mobile apps and the OpenClaw Chrome extension."
   canonicalUrl="https://openclaw.ai/privacy"
 >
   <div class="stars"></div>
@@ -16,11 +16,11 @@ const effectiveDate = 'March 7, 2026';
   <main class="container">
     <header class="header">
       <a href="/" class="back-link">&larr; Back to home</a>
-      <p class="eyebrow">OpenClaw Mobile Apps</p>
+      <p class="eyebrow">OpenClaw Apps &amp; Browser Extension</p>
       <h1 class="title">Privacy Policy</h1>
       <p class="subtitle">
-        Simple version: OpenClaw mobile apps only access device data when you enable a feature or
-        grant a permission. App data is sent to the gateway you choose, not to a central OpenClaw
+        Simple version: OpenClaw apps only access device or browser data when you enable a feature
+        or grant a permission. Data is sent to the gateway you choose, not to a central OpenClaw
         cloud.
       </p>
     </header>
@@ -28,7 +28,7 @@ const effectiveDate = 'March 7, 2026';
     <section class="summary-grid" aria-label="privacy summary">
       <article class="summary-card oc-card">
         <span class="summary-label">No ads or analytics</span>
-        <p>No ad, analytics, or crash-reporting SDKs in the current mobile builds.</p>
+        <p>No ad, analytics, or crash-reporting SDKs in the current mobile or extension builds.</p>
       </article>
       <article class="summary-card oc-card">
         <span class="summary-label">Permission-based</span>
@@ -48,17 +48,17 @@ const effectiveDate = 'March 7, 2026';
       <div class="meta-row">
         <span>Effective date: {effectiveDate}</span>
         <span class="meta-separator" aria-hidden="true">&middot;</span>
-        <span>Applies to iOS and Android mobile apps</span>
+        <span>Applies to iOS and Android mobile apps and the OpenClaw Chrome extension</span>
       </div>
 
       <section class="section">
         <h2>1. Scope</h2>
         <p>
-          This policy applies to OpenClaw mobile apps for iOS and Android. It also covers
-          supported mobile app features tied to those apps, such as share-sheet forwarding or live
-          mobile status surfaces where available. It does not cover the privacy practices of the
-          gateway, server, AI provider, or other services you choose to connect to through
-          OpenClaw.
+          This policy applies to OpenClaw mobile apps for iOS and Android and to the OpenClaw
+          Chrome extension. It also covers supported features tied to those apps, such as
+          share-sheet forwarding or live mobile status surfaces where available. It does not cover
+          the privacy practices of the gateway, server, AI provider, or other services you choose
+          to connect to through OpenClaw.
         </p>
       </section>
 
@@ -121,17 +121,53 @@ const effectiveDate = 'March 7, 2026';
       </section>
 
       <section class="section">
-        <h2>4. What we do not do</h2>
+        <h2>4. Chrome extension</h2>
+        <p>
+          The OpenClaw Chrome extension connects your own OpenClaw gateway to your Chrome browser.
+          It has a single purpose: let the agent you run see and operate the specific tabs you
+          explicitly share with it, and send page text to that agent when you ask.
+        </p>
+        <ul>
+          <li>
+            The extension requests no host permissions. It cannot read arbitrary pages you visit.
+          </li>
+          <li>
+            Tabs you place in the OpenClaw tab group are the consent boundary: the extension
+            attaches Chrome's debugging interface only to those tabs so your gateway can read and
+            drive them. Removing a tab from the group, clicking the toolbar toggle, or dismissing
+            Chrome's debugging banner revokes access immediately.
+          </li>
+          <li>
+            "Send page to OpenClaw" is a one-shot, explicit action: the readable text or current
+            selection of the active tab, its URL and title, and your optional note are sent to
+            your own gateway. For Google Docs, the extension exports the document as plain text
+            inside that tab using your existing signed-in browser session; the export goes only to
+            your gateway.
+          </li>
+          <li>
+            All extension traffic goes to the relay or gateway you paired yourself, over an
+            authenticated loopback or TLS WebSocket connection. There is no OpenClaw cloud in the
+            path and no third-party data collection.
+          </li>
+          <li>
+            The extension stores its pairing configuration (relay URL, pairing token, tab-group
+            color) and per-tab share state locally in extension storage on your machine.
+          </li>
+        </ul>
+      </section>
+
+      <section class="section">
+        <h2>5. What we do not do</h2>
         <ul>
           <li>We do not sell your personal data.</li>
-          <li>We do not include mobile ad SDKs in the current mobile builds.</li>
-          <li>We do not include mobile analytics or crash-reporting SDKs in the current mobile builds.</li>
+          <li>We do not include ad SDKs in the current mobile or extension builds.</li>
+          <li>We do not include analytics or crash-reporting SDKs in the current mobile or extension builds.</li>
           <li>Current Android builds do not request SMS read permissions.</li>
         </ul>
       </section>
 
       <section class="section">
-        <h2>5. Local storage and security</h2>
+        <h2>6. Local storage and security</h2>
         <p>
           The mobile apps store connection secrets such as gateway tokens and passwords locally
           using platform security features, such as Android encrypted shared preferences and the
@@ -145,7 +181,7 @@ const effectiveDate = 'March 7, 2026';
       </section>
 
       <section class="section">
-        <h2>6. Retention</h2>
+        <h2>7. Retention</h2>
         <p>
           Data stored on your device generally remains there until you remove it, clear app data, or
           uninstall the app. Data handled by your gateway or any connected third-party service is
@@ -154,17 +190,17 @@ const effectiveDate = 'March 7, 2026';
       </section>
 
       <section class="section">
-        <h2>7. Your choices</h2>
+        <h2>8. Your choices</h2>
         <ul>
           <li>You can deny or revoke iOS or Android permissions at any time in system settings.</li>
           <li>You can disable features such as location, notifications, voice, or talk mode inside the app.</li>
-          <li>You can disconnect from a gateway, clear app storage, or uninstall the app.</li>
+          <li>You can disconnect from a gateway, clear app storage, or uninstall the app or extension.</li>
           <li>You can control retention and third-party routing on the gateway you choose to use.</li>
         </ul>
       </section>
 
       <section class="section">
-        <h2>8. Changes and contact</h2>
+        <h2>9. Changes and contact</h2>
         <p>
           We may update this policy as the app changes. If we do, we will post the updated version
           here and update the effective date above.
