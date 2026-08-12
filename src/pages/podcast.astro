@@ -1,6 +1,6 @@
 ---
-import { Check, Rss } from '@lucide/astro';
-import { siApplepodcasts, siSpotify, siYoutube } from 'simple-icons';
+import { ArrowUpRight, Check, Rss } from '@lucide/astro';
+import { siApplepodcasts, siDiscord, siSpotify, siYoutube } from 'simple-icons';
 import Layout from '../layouts/Layout.astro';
 import SectionHeader from '../components/SectionHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
@@ -25,7 +25,7 @@ const structuredData = {
   title="OpenClaw Podcast"
   description="The ClawCast is OpenClaw's official video podcast, hosted by Hannes Rudolph. Find every episode on Spotify and YouTube, or subscribe with the RSS feed."
   canonicalUrl="https://openclaw.ai/podcast"
-  ogImage="/podcast/clawcast-share.png"
+  ogImage="/podcast/clawcast-social-preview.png"
   ogImageWidth={1200}
   ogImageHeight={630}
   structuredData={structuredData}
@@ -40,9 +40,26 @@ const structuredData = {
         <h1 id="podcast-title">The ClawCast</h1>
         <p class="intro">
           Hosted by Hannes Rudolph, The ClawCast features conversations with the people building, maintaining, and
-          using OpenClaw — release deep-dives, what maintainers and guests are learning, and what comes next for
+          using OpenClaw: release deep-dives, what maintainers and guests are learning, and what comes next for
           personal AI.
         </p>
+        <a
+          href={discordUrl}
+          target="_blank"
+          rel="noopener"
+          class="live-recording-cta oc-action oc-action-secondary"
+          aria-label="Join the live ClawCast recording on Discord, Wednesdays at 11:30 AM Pacific Time"
+        >
+          <span class="live-recording-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d={siDiscord.path} /></svg>
+          </span>
+          <span class="live-recording-copy">
+            <span class="live-recording-label"><span class="live-recording-dot" aria-hidden="true"></span>Live recording</span>
+            <strong>Join the ClawCast on Discord</strong>
+            <span class="live-recording-time">Wednesdays at 11:30 AM PT</span>
+          </span>
+          <ArrowUpRight size={18} strokeWidth={1.8} aria-hidden="true" class="live-recording-arrow" />
+        </a>
       </div>
 
       <div class="podcast-cover-frame">
@@ -59,7 +76,7 @@ const structuredData = {
       </div>
 
       <div class="platform-panel">
-        <div class="platforms" aria-label="Podcast platforms">
+        <div class="platforms" role="group" aria-label="Podcast platforms">
           <a
             href={spotifyUrl}
             target="_blank"
@@ -90,7 +107,7 @@ const structuredData = {
             </span>
           </a>
 
-          <div class="platform-card platform-card--coming-soon" aria-label="Apple Podcasts coming soon">
+          <div class="platform-card platform-card--coming-soon">
             <span class="platform-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24"><path d={siApplepodcasts.path} /></svg>
             </span>
@@ -116,10 +133,7 @@ const structuredData = {
     </section>
 
     <section class="episodes" aria-label="Episodes">
-      <SectionHeader
-        title="Episodes"
-        link={{ href: discordUrl, text: 'Live Wednesdays 11:30 AM PT on Discord' }}
-      />
+      <SectionHeader title="Episodes" />
       <ol class="episode-list">
         {podcastEpisodes.map((episode) => (
           <li class="episode-row">
@@ -131,7 +145,7 @@ const structuredData = {
             <div class="episode-row-body">
               <div class="episode-row-header">
                 <h3><a href={`/podcast/${episode.slug}`}>{episode.title}</a></h3>
-                <div class="episode-row-actions" aria-label={`Platforms for ${episode.title}`}>
+                <div class="episode-row-actions" role="group" aria-label={`Platforms for ${episode.title}`}>
                   <a
                     href={episode.youtubeUrl}
                     target="_blank"
@@ -208,6 +222,13 @@ const structuredData = {
     flex-direction: column;
   }
 
+  :global(html[data-theme='light']) .eyebrow,
+  :global(html[data-theme='light']) .live-recording-label,
+  :global(html[data-theme='light']) .episode-row-meta span:first-child,
+  :global(html[data-theme='light']) .episodes :global(.section-title) {
+    color: var(--oc-accent-primary-deep);
+  }
+
   .rail {
     width: 100%;
     max-width: 1060px;
@@ -262,6 +283,95 @@ const structuredData = {
     font-size: 1.12rem;
   }
 
+  .live-recording-cta {
+    display: grid;
+    width: min(100%, 520px);
+    grid-template-columns: 24px minmax(0, 1fr) auto;
+    gap: var(--oc-space-3);
+    align-items: center;
+    margin-top: var(--oc-space-5);
+    padding: var(--oc-space-3) var(--oc-space-4);
+    border-color: var(--oc-border-accent);
+    background: var(--oc-surface-accent-soft);
+    color: var(--oc-text-primary);
+  }
+
+  .live-recording-cta:hover {
+    border-color: var(--oc-accent-primary);
+    background: color-mix(in srgb, var(--oc-surface-accent-soft) 72%, var(--oc-accent-primary));
+    color: var(--oc-text-primary);
+  }
+
+  .live-recording-cta:focus-visible {
+    outline-color: var(--oc-focus-ring);
+    outline-offset: 3px;
+  }
+
+  .live-recording-icon {
+    display: inline-flex;
+    width: 24px;
+    height: 24px;
+    align-items: center;
+    justify-content: center;
+    color: var(--oc-text-primary);
+  }
+
+  .live-recording-icon svg {
+    width: 19px;
+    height: 19px;
+    fill: currentColor;
+  }
+
+  .live-recording-copy {
+    display: grid;
+    min-width: 0;
+    gap: 1px;
+  }
+
+  .live-recording-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--oc-accent-primary);
+    font-family: var(--oc-font-mono);
+    font-size: var(--oc-font-size-xs);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .live-recording-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: var(--oc-radius-round);
+    background: currentColor;
+  }
+
+  .live-recording-copy strong {
+    overflow: hidden;
+    font-size: var(--oc-font-size-md);
+    font-weight: 650;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .live-recording-time {
+    color: var(--oc-text-secondary);
+    font-size: var(--oc-font-size-xs);
+  }
+
+  .live-recording-arrow {
+    color: var(--oc-text-muted);
+    transition:
+      color var(--oc-duration-fast) var(--oc-ease-out),
+      transform var(--oc-duration-fast) var(--oc-ease-out);
+  }
+
+  .live-recording-cta:hover .live-recording-arrow {
+    color: var(--oc-accent-primary);
+    transform: translate(2px, -2px);
+  }
+
   .podcast-cover-frame {
     grid-area: cover;
     width: min(100%, 340px);
@@ -299,7 +409,7 @@ const structuredData = {
     margin: 0 -24px;
     padding: 30px 24px;
     border-bottom: 1px solid var(--oc-border-subtle);
-    transition: background 0.15s ease;
+    transition: background var(--oc-duration-fast) var(--oc-ease-out);
   }
 
   .episode-row:first-child {
@@ -397,7 +507,7 @@ const structuredData = {
 
   .episode-row-actions a:focus-visible,
   .episode-row-header h3 a:focus-visible {
-    outline: 2px solid var(--oc-accent-primary);
+    outline: 2px solid var(--oc-focus-ring);
     outline-offset: 3px;
   }
 
@@ -423,7 +533,9 @@ const structuredData = {
     border-radius: 0;
     color: var(--oc-text-primary);
     text-decoration: none;
-    transition: border-color 150ms ease, color 150ms ease;
+    transition:
+      border-color var(--oc-duration-fast) var(--oc-ease-out),
+      color var(--oc-duration-fast) var(--oc-ease-out);
   }
 
   .platform-card:hover {
@@ -431,7 +543,7 @@ const structuredData = {
   }
 
   .platform-card:focus-visible {
-    outline: 2px solid var(--oc-accent-primary);
+    outline: 2px solid var(--oc-focus-ring);
     outline-offset: 2px;
   }
 
@@ -544,9 +656,9 @@ const structuredData = {
         'cover'
         'listen';
       grid-template-columns: 1fr;
-      gap: 24px;
-      padding-top: 72px;
-      padding-bottom: 36px;
+      gap: var(--oc-space-4);
+      padding-top: var(--oc-space-6);
+      padding-bottom: var(--oc-space-4);
     }
 
     .hero-content {
@@ -558,7 +670,7 @@ const structuredData = {
     }
 
     .podcast-cover-frame {
-      width: min(100%, 320px);
+      width: min(100%, 200px);
       justify-self: start;
     }
 
@@ -570,7 +682,7 @@ const structuredData = {
     }
 
     .episodes {
-      padding: 40px 0 56px;
+      padding: var(--oc-space-4) 0 56px;
     }
 
     .episode-row-meta {
@@ -586,12 +698,12 @@ const structuredData = {
     }
 
     .platforms {
-      grid-template-columns: 1fr;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
     .platform-card {
-      min-height: 58px;
-      padding: 9px 11px;
+      min-height: var(--oc-control-min-height);
+      padding: var(--oc-space-2);
     }
 
     .platform-card--rss {
