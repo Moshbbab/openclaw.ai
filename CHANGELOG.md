@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Homepage: add the ownership line to the hero — "The longer you use it, the more it becomes yours. Your memories. Your skills. Your models. Your machines. Your data."
+
 - Docs: rewrite the README as a concise contributor front door and move hosted installer details into a dedicated guide.
 - Windows installer: sync the OpenClaw 2026.7.1 runtime validation fix so upgraded Node 22/24 installs are checked through the active executable.
 - Security: prevent blog and author JSON-LD metadata from breaking out of its script element (#208, thanks @SebTardif).

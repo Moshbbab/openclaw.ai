@@ -104,6 +104,11 @@ const asciiAurora = renderAsciiAurora();
           All from WhatsApp, Telegram, or any chat app you already use.
         </p>
 
+        <p class="hero-ownership">
+          The longer you use it, the more it becomes yours.<br/>
+          <span class="hero-ownership-yours">Your memories. Your skills. Your models. Your machines. Your data.</span>
+        </p>
+
         <div class="hero-actions">
           <a href="#quickstart" class="hero-cta oc-action oc-action-primary">Get started</a>
           <a href="https://docs.openclaw.ai/" target="_blank" rel="noopener" class="hero-cta hero-cta-ghost oc-action oc-action-ghost">Read the docs</a>
@@ -823,6 +828,23 @@ const asciiAurora = renderAsciiAurora();
     max-width: 620px;
     margin: 0 auto;
     line-height: 1.8;
+  }
+
+  .hero-ownership {
+    font-size: 0.95rem;
+    font-style: italic;
+    color: var(--oc-text-muted);
+    max-width: 620px;
+    margin: 0.9rem auto 0;
+    line-height: 1.7;
+  }
+
+  .hero-ownership-yours {
+    font-family: var(--oc-font-mono);
+    font-style: normal;
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    color: var(--oc-accent-primary);
   }
 
   @media (max-width: 640px) {
