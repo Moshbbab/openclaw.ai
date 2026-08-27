@@ -19,6 +19,9 @@ on:
           - dry-run
           - full
 
+permissions:
+  contents: read
+
 jobs:
   linux-install-matrix:
     runs-on: ubuntu-latest

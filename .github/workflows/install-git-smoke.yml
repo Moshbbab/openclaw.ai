@@ -5,6 +5,9 @@ on:
   schedule:
     - cron: "0 6 * * *" # daily
 
+permissions:
+  contents: read
+
 jobs:
   install-git-smoke:
     runs-on: ubuntu-latest
