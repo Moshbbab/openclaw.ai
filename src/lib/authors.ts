@@ -165,7 +165,6 @@ export function getAuthorLinks(author: BlogAuthor): AuthorLink[] {
 
 function getAuthorLinkMeta(author: BlogAuthor, link: AuthorLink): AuthorLinkMeta {
   const label = link.label.trim();
-  const normalizedLabel = label.toLowerCase();
   let hostname = '';
 
   try {
@@ -174,15 +173,15 @@ function getAuthorLinkMeta(author: BlogAuthor, link: AuthorLink): AuthorLinkMeta
     hostname = '';
   }
 
-  if (hostname === 'x.com' || hostname === 'twitter.com' || normalizedLabel === 'x' || normalizedLabel.startsWith('@')) {
+  if (hostname === 'x.com' || hostname === 'twitter.com') {
     return { ...link, displayLabel: label.startsWith('@') ? label : 'X', icon: siX.path, ariaLabel: `${author.name} on X`, order: 0 };
   }
 
-  if (hostname.endsWith('linkedin.com') || normalizedLabel.includes('linkedin')) {
+  if (hostname === 'linkedin.com' || hostname.endsWith('.linkedin.com')) {
     return { ...link, displayLabel: 'LinkedIn', icon: linkedinIcon, ariaLabel: `${author.name} on LinkedIn`, order: 1 };
   }
 
-  if (hostname === 'github.com' || normalizedLabel.includes('github')) {
+  if (hostname === 'github.com') {
     return { ...link, displayLabel: 'GitHub', icon: siGithub.path, ariaLabel: `${author.name} on GitHub`, order: 2 };
   }
 
